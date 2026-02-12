@@ -3,165 +3,273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akam Premium AR Menu</title>
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <title>Akam Royal Menu</title>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;800&display=swap" rel="stylesheet">
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
-            background: radial-gradient(circle, #1a1a1a 0%, #000000 100%);
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #1c1c1c 0%, #000000 100%);
+            font-family: 'Tajawal', sans-serif;
             height: 100vh;
             overflow: hidden;
-            color: white;
+            color: #d4af37; /* ڕەنگی ئاڵتوونی */
         }
 
-        /* سندوقی ناوی خواردن و نرخ */
+        /* لۆگۆی سەرەوە */
+        .brand-header {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 20;
+        }
+        
+        .brand-text {
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(212, 175, 55, 0.7);
+            font-weight: bold;
+        }
+
+        /* کارتی زانیاری لۆکس */
         .info-card {
             position: absolute;
-            top: 30px;
+            top: 60px;
             right: 20px;
             left: 20px;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(20, 20, 20, 0.6);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.3); /* چوارچێوەی ئاڵتوونی */
+            border-radius: 15px;
             text-align: center;
             z-index: 10;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
         }
 
         .food-name {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 800;
-            margin-bottom: 8px;
-            background: linear-gradient(to bottom, #ffffff, #aaaaaa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
         .price-badge {
             display: inline-block;
-            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            padding: 5px 25px;
-            border-radius: 50px;
-            font-size: 18px;
+            color: #d4af37;
+            font-size: 20px;
             font-weight: bold;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 5px;
         }
 
-        /* ناوی تۆ وەک گەشەپێدەر */
-        .developer-tag {
+        .desc-text {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 8px;
+        }
+
+        /* مێنۆی سکڕۆڵ (خوارەوە) */
+        .scroll-menu {
             position: absolute;
-            bottom: 115px;
+            bottom: 30px;
+            left: 0;
             width: 100%;
-            text-align: center;
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.3);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            z-index: 5;
-            font-weight: bold;
+            display: flex;
+            overflow-x: auto; /* ئەمە ڕێگە دەدات سکڕۆڵ بکرێت */
+            padding: 20px;
+            gap: 15px;
+            z-index: 20;
+            scroll-behavior: smooth;
+            /* شاردنەوەی باڕی سکڕۆڵ */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .scroll-menu::-webkit-scrollbar {
+            display: none;
         }
 
-        /* دوگمەی بینین لەسەر مێز */
+        .menu-item {
+            min-width: 100px;
+            height: 120px;
+            background: rgba(50, 50, 50, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+        }
+
+        .menu-item.active {
+            background: linear-gradient(45deg, #d4af37, #f6e27a);
+            color: black;
+            border: none;
+            transform: scale(1.1) translateY(-10px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        .menu-icon {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        /* دوگمەی AR */
         .ar-btn {
             position: absolute;
-            bottom: 40px;
+            bottom: 180px; /* بەرزتر لە مێنۆکە */
             left: 50%;
             transform: translateX(-50%);
-            background: #ffffff;
-            color: #000000;
-            border: none;
-            padding: 18px 45px;
-            border-radius: 100px;
-            font-size: 18px;
-            font-weight: 900;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid white;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: bold;
             display: flex;
             align-items: center;
-            gap: 12px;
-            box-shadow: 0 10px 40px rgba(255,255,255,0.2);
-            cursor: pointer;
+            gap: 10px;
+            backdrop-filter: blur(5px);
             z-index: 10;
         }
 
         model-viewer {
             width: 100%;
             height: 100vh;
-            --poster-color: transparent;
         }
     </style>
 </head>
 <body>
 
-    <div class="info-card">
-        <div id="food-name" class="food-name">باردەکرێت...</div>
-        <div id="food-price" class="price-badge">---</div>
+    <div class="brand-header">
+        <div class="brand-text">AKAM PREMIUM AR</div>
     </div>
 
-    <div class="developer-tag">Designed & Developed by AKAM</div>
+    <div class="info-card">
+        <div id="food-name" class="food-name">...</div>
+        <div id="food-price" class="price-badge">---</div>
+        <div id="food-desc" class="desc-text">پێکهاتەکان لێرە دەنووسرێن</div>
+    </div>
 
     <model-viewer id="akam-model" 
         src="" 
         ar 
         ar-modes="webxr scene-viewer quick-look" 
-        ar-placement="floor"
-        ar-scale="fixed"
         camera-controls 
         shadow-intensity="2" 
-        shadow-softness="0.5"
-        exposure="1.2"
+        exposure="0.8"
         environment-image="neutral"
         auto-rotate>
         
         <button slot="ar-button" class="ar-btn">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-                <circle cx="12" cy="13" r="4"></circle>
-            </svg>
-            بینین لەسەر مێزەکەت
+            👁️ دیمەنی سەر مێز
         </button>
     </model-viewer>
 
-    <script>
-        // لیستی تەواوی خواردنەکان
-        const foods = {
-            'pizza': { 
-                name: 'پیتزای ئیتالی', 
-                price: '12,500 د.ک', 
-                file: 'pizza.glb' 
-            },
-            'burger': { 
-                name: 'بەرگری دۆبڵ چیز', 
-                price: '9,500 د.ک', 
-                file: 'burger.glb' 
-            },
-            'kebab': { 
-                name: 'کەبابی گۆشتی فرێش', 
-                price: '10,000 د.ک', 
-                file: 'kebab.glb' 
-            },
-            'rice': { 
-                name: 'برنج و شلەی کوردی', 
-                price: '7,500 د.ک', 
-                file: 'rice.glb' 
-            }
-        };
+    <div class="scroll-menu" id="menu-container">
+        </div>
 
-        function initMenu() {
-            const hash = window.location.hash.replace('#', '').toLowerCase();
-            const food = foods[hash] || foods['pizza'];
+    <script>
+        // ---------------------------------------------------------
+        // تەنها ئەم بەشە دەستکاری بکە بۆ زیادکردنی خواردن
+        // ---------------------------------------------------------
+        const foods = [
+            { 
+                id: 'steak', 
+                name: 'ستێکی شاهانە', 
+                price: '25,000 د.ک', 
+                desc: 'گۆشتی مانگای تازە لەگەڵ سۆسی تایبەت',
+                icon: '🥩', 
+                file: 'steak.glb', 
+                scale: '0.5 0.5 0.5' 
+            },
+            { 
+                id: 'burger', 
+                name: 'بەرگری تڕەفڵ', 
+                price: '18,000 د.ک', 
+                desc: 'بە نانی ڕەش و قارچکی تڕەفڵ',
+                icon: '🍔', 
+                file: 'burger.glb', 
+                scale: '0.4 0.4 0.4' 
+            },
+            { 
+                id: 'pizza', 
+                name: 'پیتزای ئاڵتوونی', 
+                price: '20,000 د.ک', 
+                desc: 'پەنیر و پەپەڕۆنی ئیتاڵی',
+                icon: '🍕', 
+                file: 'pizza.glb', 
+                scale: '0.5 0.5 0.5' 
+            },
+            { 
+                id: 'pasta', 
+                name: 'پاستای ئەلفڕێدۆ', 
+                price: '14,000 د.ک', 
+                desc: 'بە کرێم و پارمیسان',
+                icon: '🍝', 
+                file: 'pasta.glb', 
+                scale: '0.5 0.5 0.5' 
+            },
+            { 
+                id: 'drink', 
+                name: 'مۆخیتۆ', 
+                price: '6,000 د.ک', 
+                desc: 'نەعنا و لیمۆی سروشتی',
+                icon: '🍹', 
+                file: 'drink.glb', 
+                scale: '0.3 0.3 0.3' 
+            }
+        ];
+        // ---------------------------------------------------------
+
+        const modelViewer = document.getElementById('akam-model');
+        const menuContainer = document.getElementById('menu-container');
+
+        // دروستکردنی دوگمەکان بە ئۆتۆماتیکی
+        foods.forEach((food, index) => {
+            const btn = document.createElement('div');
+            btn.className = 'menu-item';
+            if(index === 0) btn.classList.add('active'); // یەکەم دانە چالاک بێت
             
+            btn.innerHTML = `
+                <div class="menu-icon">${food.icon}</div>
+                <div>${food.name.split(' ')[0]}</div> 
+            `;
+            
+            btn.onclick = () => switchFood(food, btn);
+            menuContainer.appendChild(btn);
+        });
+
+        // چالاککردنی یەکەم خواردن
+        switchFood(foods[0], menuContainer.children[0]);
+
+        function switchFood(food, btnElement) {
+            // گۆڕینی داتا
             document.getElementById('food-name').innerText = food.name;
             document.getElementById('food-price').innerText = food.price;
-            document.getElementById('akam-model').src = food.file;
-        }
+            document.getElementById('food-desc').innerText = food.desc;
+            
+            // گۆڕینی مۆدێل
+            modelViewer.src = food.file;
+            modelViewer.setAttribute('scale', food.scale);
 
-        window.addEventListener('hashchange', initMenu);
-        window.onload = initMenu;
+            // گۆڕینی ستایلی دوگمەکان
+            document.querySelectorAll('.menu-item').forEach(b => b.classList.remove('active'));
+            if(btnElement) btnElement.classList.add('active');
+        }
     </script>
 </body>
 </html>
