@@ -127,25 +127,27 @@
         }
 
         /* دوگمەی AR */
+                /* دوگمەی AR */
         .ar-btn {
             position: absolute;
-            bottom: 180px; /* بەرزتر لە مێنۆکە */
+            bottom: 220px; /* لێرەدا بەرزمان کردەوە بۆ ئەوەی نەکەوێتە ژێر لیستەکە */
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid white;
-            color: white;
+            background: rgba(212, 175, 55, 0.15); /* کەمێک ڕەنگی ئاڵتوونیمان تێکەڵ کرد بۆ جوانی */
+            border: 1px solid #d4af37; /* چوارچێوەی ئاڵتوونی */
+            color: #fff;
             padding: 12px 30px;
             border-radius: 50px;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: bold;
             display: flex;
             align-items: center;
             gap: 10px;
-            backdrop-filter: blur(5px);
-            z-index: 10;
+            backdrop-filter: blur(8px);
+            z-index: 999; /* ئەمە وادەکات هەمیشە لە سەرووی هەموو دوگمەکانی ترەوە بێت */
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
-
         model-viewer {
             width: 100%;
             height: 100vh;
@@ -190,7 +192,7 @@
             { 
                 id: 'steak', 
                 name: 'ستێکی شاهانە', 
-                price: '25,000 د.ک', 
+                price: '25,000 د.ع', 
                 desc: 'گۆشتی مانگای تازە لەگەڵ سۆسی تایبەت',
                 icon: '🥩', 
                 file: 'steak.glb', 
@@ -199,7 +201,7 @@
             { 
                 id: 'burger', 
                 name: 'بەرگری تڕەفڵ', 
-                price: '18,000 د.ک', 
+                price: '18,000 د.ع', 
                 desc: 'بە نانی ڕەش و قارچکی تڕەفڵ',
                 icon: '🍔', 
                 file: 'burger.glb', 
@@ -208,7 +210,7 @@
             { 
                 id: 'pizza', 
                 name: 'پیتزای ئاڵتوونی', 
-                price: '20,000 د.ک', 
+                price: '20,000 د.ع', 
                 desc: 'پەنیر و پەپەڕۆنی ئیتاڵی',
                 icon: '🍕', 
                 file: 'pizza.glb', 
@@ -217,7 +219,7 @@
             { 
                 id: 'pasta', 
                 name: 'پاستای ئەلفڕێدۆ', 
-                price: '14,000 د.ک', 
+                price: '14,000 د.ع', 
                 desc: 'بە کرێم و پارمیسان',
                 icon: '🍝', 
                 file: 'pasta.glb', 
@@ -226,7 +228,7 @@
             { 
                 id: 'drink', 
                 name: 'مۆخیتۆ', 
-                price: '6,000 د.ک', 
+                price: '6,000 د.ع', 
                 desc: 'نەعنا و لیمۆی سروشتی',
                 icon: '🍹', 
                 file: 'drink.glb', 
