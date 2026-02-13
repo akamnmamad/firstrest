@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akam Royal Menu</title>
+    <title>Akam Premium Menu</title>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
             background: linear-gradient(135deg, #1c1c1c 0%, #000000 100%);
-            font-family: 'Tajawal', sans-serif;
+            font-family: 'Vazirmatn', sans-serif; /* فۆنتە نوێیەکە لێرە جێگیر کراوە */
             height: 100vh;
             overflow: hidden;
-            color: #d4af37; /* ڕەنگی ئاڵتوونی */
+            color: #d4af37;
         }
 
         /* لۆگۆی سەرەوە */
@@ -33,7 +33,7 @@
             letter-spacing: 4px;
             text-transform: uppercase;
             color: rgba(212, 175, 55, 0.7);
-            font-weight: bold;
+            font-weight: 900;
         }
 
         /* کارتی زانیاری لۆکس */
@@ -45,7 +45,7 @@
             padding: 20px;
             background: rgba(20, 20, 20, 0.6);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.3); /* چوارچێوەی ئاڵتوونی */
+            border: 1px solid rgba(212, 175, 55, 0.3);
             border-radius: 15px;
             text-align: center;
             z-index: 10;
@@ -53,8 +53,8 @@
         }
 
         .food-name {
-            font-size: 28px;
-            font-weight: 800;
+            font-size: 26px; /* کەمێک گونجاوم کرد بۆ فۆنتە نوێیەکە */
+            font-weight: 900;
             margin-bottom: 5px;
             color: #fff;
             text-shadow: 0 2px 10px rgba(0,0,0,0.5);
@@ -64,30 +64,31 @@
             display: inline-block;
             color: #d4af37;
             font-size: 20px;
-            font-weight: bold;
+            font-weight: 700;
             border-bottom: 2px solid #d4af37;
             padding-bottom: 5px;
         }
 
         .desc-text {
-            font-size: 12px;
+            font-size: 13px;
             color: #aaa;
             margin-top: 8px;
+            font-weight: 400;
+            line-height: 1.6; /* بۆ ئەوەی پیتەکان نەچن بە یەکدا */
         }
 
         /* مێنۆی سکڕۆڵ (خوارەوە) */
         .scroll-menu {
             position: absolute;
-            bottom: 30px;
+            bottom: 25px;
             left: 0;
             width: 100%;
             display: flex;
-            overflow-x: auto; /* ئەمە ڕێگە دەدات سکڕۆڵ بکرێت */
-            padding: 20px;
-            gap: 15px;
+            overflow-x: auto;
+            padding: 15px 20px;
+            gap: 12px;
             z-index: 20;
             scroll-behavior: smooth;
-            /* شاردنەوەی باڕی سکڕۆڵ */
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
@@ -96,18 +97,20 @@
             display: none;
         }
 
+        /* دوگمە بچووکەکان */
         .menu-item {
-            min-width: 100px;
-            height: 120px;
+            min-width: 85px; 
+            height: 105px;   
             background: rgba(50, 50, 50, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
+            border-radius: 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 14px;
+            font-size: 13px; 
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             backdrop-filter: blur(10px);
@@ -117,40 +120,72 @@
             background: linear-gradient(45deg, #d4af37, #f6e27a);
             color: black;
             border: none;
-            transform: scale(1.1) translateY(-10px);
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+            transform: scale(1.08) translateY(-8px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
         }
 
         .menu-icon {
-            font-size: 30px;
-            margin-bottom: 8px;
+            font-size: 26px; 
+            margin-bottom: 6px;
         }
 
         /* دوگمەی AR */
-                /* دوگمەی AR */
-                /* دوگمەی AR - چارەسەری کۆتایی */
         .ar-btn {
             position: absolute !important;
-            bottom: 35% !important; /* لەبری پیکسڵ ڕێژەی سەدییە، بۆ ئەوەی هەرگیز نەچێتە خوارەوە */
+            bottom: 35% !important; 
             left: 50% !important;
             transform: translateX(-50%) !important;
             background: rgba(212, 175, 55, 0.15) !important;
             border: 1px solid #d4af37 !important;
             color: #fff !important;
-            padding: 12px 35px !important;
+            padding: 10px 30px !important;
             border-radius: 50px !important;
-            font-size: 16px !important;
-            font-weight: bold !important;
+            font-size: 15px !important;
+            font-family: 'Vazirmatn', sans-serif !important; /* فۆنتەکە بۆ ئێرەش گۆڕدرا */
+            font-weight: 700 !important;
             display: flex !important;
             align-items: center !important;
-            gap: 10px !important;
+            gap: 8px !important;
             backdrop-filter: blur(10px) !important;
-            z-index: 999999 !important; /* ئەوپەڕی هێز بۆ ئەوەی بێتە پێشەوە */
+            z-index: 999999 !important; 
             box-shadow: 0 5px 20px rgba(0,0,0,0.5) !important;
+            cursor: pointer;
         }
+
+        /* باڕی پڕبوونەوەی VIP */
+        .progress-bar {
+            display: block;
+            width: 40%;
+            height: 6px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate3d(-50%, -50%, 0);
+            border-radius: 25px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            overflow: hidden;
+            z-index: 50;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        
+        .update-bar {
+            background: linear-gradient(90deg, #d4af37, #f6e27a);
+            width: 0%;
+            height: 100%;
+            border-radius: 25px;
+            transition: width 0.2s;
+        }
+
+        .progress-bar.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+
         model-viewer {
             width: 100%;
             height: 100vh;
+            outline: none;
         }
     </style>
 </head>
@@ -177,22 +212,24 @@
         auto-rotate>
         
         <button slot="ar-button" class="ar-btn">
-            👁️ دیمەنی سەر مێز
+            👁️ بینین لەسەر مێز
         </button>
+
+        <div class="progress-bar" slot="progress-bar">
+            <div class="update-bar"></div>
+        </div>
     </model-viewer>
 
     <div class="scroll-menu" id="menu-container">
         </div>
 
     <script>
-        // ---------------------------------------------------------
-        // تەنها ئەم بەشە دەستکاری بکە بۆ زیادکردنی خواردن
-        // ---------------------------------------------------------
+        // داتای خواردنەکان (بەپێی پێویست بیگۆڕە)
         const foods = [
             { 
                 id: 'steak', 
                 name: 'ستێکی شاهانە', 
-                price: '25,000 د.ع', 
+                price: '25,000 د.ک', 
                 desc: 'گۆشتی مانگای تازە لەگەڵ سۆسی تایبەت',
                 icon: '🥩', 
                 file: 'steak.glb', 
@@ -201,7 +238,7 @@
             { 
                 id: 'burger', 
                 name: 'بەرگری تڕەفڵ', 
-                price: '18,000 د.ع', 
+                price: '18,000 د.ک', 
                 desc: 'بە نانی ڕەش و قارچکی تڕەفڵ',
                 icon: '🍔', 
                 file: 'burger.glb', 
@@ -210,7 +247,7 @@
             { 
                 id: 'pizza', 
                 name: 'پیتزای ئاڵتوونی', 
-                price: '20,000 د.ع', 
+                price: '20,000 د.ک', 
                 desc: 'پەنیر و پەپەڕۆنی ئیتاڵی',
                 icon: '🍕', 
                 file: 'pizza.glb', 
@@ -219,32 +256,24 @@
             { 
                 id: 'pasta', 
                 name: 'پاستای ئەلفڕێدۆ', 
-                price: '14,000 د.ع', 
+                price: '14,000 د.ک', 
                 desc: 'بە کرێم و پارمیسان',
                 icon: '🍝', 
                 file: 'pasta.glb', 
                 scale: '0.5 0.5 0.5' 
-            },
-            { 
-                id: 'drink', 
-                name: 'مۆخیتۆ', 
-                price: '6,000 د.ع', 
-                desc: 'نەعنا و لیمۆی سروشتی',
-                icon: '🍹', 
-                file: 'drink.glb', 
-                scale: '0.3 0.3 0.3' 
             }
         ];
-        // ---------------------------------------------------------
 
         const modelViewer = document.getElementById('akam-model');
         const menuContainer = document.getElementById('menu-container');
+        const updateBar = document.querySelector('.update-bar');
+        const progressBar = document.querySelector('.progress-bar');
 
-        // دروستکردنی دوگمەکان بە ئۆتۆماتیکی
+        // دروستکردنی دوگمەکان
         foods.forEach((food, index) => {
             const btn = document.createElement('div');
             btn.className = 'menu-item';
-            if(index === 0) btn.classList.add('active'); // یەکەم دانە چالاک بێت
+            if(index === 0) btn.classList.add('active'); 
             
             btn.innerHTML = `
                 <div class="menu-icon">${food.icon}</div>
@@ -255,23 +284,36 @@
             menuContainer.appendChild(btn);
         });
 
-        // چالاککردنی یەکەم خواردن
-        switchFood(foods[0], menuContainer.children[0]);
-
         function switchFood(food, btnElement) {
-            // گۆڕینی داتا
             document.getElementById('food-name').innerText = food.name;
             document.getElementById('food-price').innerText = food.price;
             document.getElementById('food-desc').innerText = food.desc;
             
-            // گۆڕینی مۆدێل
+            progressBar.classList.remove('hide');
+            updateBar.style.width = '0%';
+
             modelViewer.src = food.file;
             modelViewer.setAttribute('scale', food.scale);
 
-            // گۆڕینی ستایلی دوگمەکان
             document.querySelectorAll('.menu-item').forEach(b => b.classList.remove('active'));
             if(btnElement) btnElement.classList.add('active');
         }
+
+        switchFood(foods[0], menuContainer.children[0]);
+
+        modelViewer.addEventListener('progress', (event) => {
+            const progress = event.detail.totalProgress * 100;
+            updateBar.style.width = `${progress}%`;
+            
+            if (progress === 100) {
+                setTimeout(() => {
+                    progressBar.classList.add('hide');
+                }, 400);
+            } else {
+                progressBar.classList.remove('hide');
+            }
+        });
     </script>
 </body>
 </html>
+
